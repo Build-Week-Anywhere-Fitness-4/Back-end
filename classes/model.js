@@ -5,8 +5,7 @@ module.exports = {
     findById,
     add,
     update,
-    remove,
-    getWorkout
+    remove
 }
 
 function find(){
@@ -38,10 +37,3 @@ function remove(id){
     .delete()
 }
 
-function getWorkout(id){
-    return db('classes as c')
-    .join("users_classes as uc", "c.id", "uc.class_id")
-    .join("users as u", "users.id", "uc.user_id")
-    .select("c.name", "u.username", "c.location", "c.start_time", "c.duration", "u.id as user_id")
-    .where('u.id', id)
-}

@@ -43,17 +43,6 @@ router.get('/:id', (req, res) => {
     })
 })
 
-router.get('/:id/workouts', (req, res) => {
-    const { id } = req.params
-    Classes.getWorkout(id)
-    .then( classes => {
-        res.json(classes)
-    })
-    .catch( () => {
-        res.status(500).json({ message: "Cannot find user"})
-    })
-})
-
 router.put('/:id', (req, res) => {
     const {id} = req.params
     const changes = req.body
