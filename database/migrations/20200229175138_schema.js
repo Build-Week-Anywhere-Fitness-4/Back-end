@@ -14,10 +14,18 @@ exports.up = function(knex) {
       tbl.string("type", 255).notNullable()
       tbl.string("duration", 255).notNullable()
       tbl.string("intensity", 255).notNullable()
-      tbl.string("location", 255)
+      tbl.string("location", 255).notNullable()
+      tbl.string("description", 255).notNullable()
       tbl.time("start_time")
       tbl.string("size", 5)
       tbl.string("max_size", 5)
+      tbl.integer("instructor_id")
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
+        .onUpdate('CASCADE')
   })
   .createTable("users_classes", tbl => {
     tbl.increments();
@@ -27,7 +35,7 @@ exports.up = function(knex) {
         .inTable("users")
         .unsigned()
         .notNullable()
-        .onDelete("RESTRICT")
+        .onDelete("CASCADE")
         .onUpdate("CASCADE")
     tbl
         .integer("class_id")
@@ -35,7 +43,7 @@ exports.up = function(knex) {
         .inTable("classes")
         .unsigned()
         .notNullable()
-        .onDelete("RESTRICT")
+        .onDelete("CASCADE")
         .onUpdate("CASCADE")
   })
 };
