@@ -20,6 +20,7 @@ router.post('/', isInstructor, (req, res) => {
     })
 })
 
+
 router.get('/', (req,res) => {
     Classes.find()
     .then(exercise => {

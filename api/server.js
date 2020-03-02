@@ -18,7 +18,7 @@ server.get("/", (req,res) => {
     res.status(200).json({message: "let the games begin"})
 })
 
-server.use('/api/auth', authRouter)
+server.use('/api/', authRouter)
 server.use('/api/users', restricted, userRouter)
 server.use('/api/classes',restricted, classRouter)
 
