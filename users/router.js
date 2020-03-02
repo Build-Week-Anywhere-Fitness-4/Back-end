@@ -36,9 +36,10 @@ router.put('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req,res) => {
-    Users.remove(req.params.id)
+    const {id} = req.params
+    Users.remove(id)
     .then(user => {
-        res.status(204).end()
+        res.status(200).json(user)
     })
     .catch(() => {
         res.status(500).json({ message: 'cannot delete user'})
