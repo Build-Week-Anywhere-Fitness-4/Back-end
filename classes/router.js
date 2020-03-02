@@ -1,7 +1,10 @@
 const router = require("express").Router()
 const Classes = require('./model')
 
-router.post('/', (req, res) => {
+const {isInstructor} = require("../middleware/middleware")
+
+
+router.post('/', isInstructor, (req, res) => {
     const newClass = req.body
 
     Classes.add(newClass)
@@ -43,7 +46,7 @@ router.get('/:id', (req, res) => {
     })
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', isInstructor, (req, res) => {
     const {id} = req.params
     const changes = req.body
     Classes.update(id, changes)
@@ -55,12 +58,12 @@ router.put('/:id', (req, res) => {
     })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', isInstructor, (req, res) => {
     const {id} = req.params
 
     Classes.remove(id)
     .then( deleted => {
-        res.status(204).end()
+        res.status(200).json(deleted)
     })
     .catch(() => {
         res.status(500).json({ message: "Cannot delete class"})
