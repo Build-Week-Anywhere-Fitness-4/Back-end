@@ -1,15 +1,11 @@
 const router = require('express').Router()
 const Users = require("./model")
-const Classes = require("../classes/model")
 
 router.post('/:id/workouts/:class_id', (req, res) => {
     const workout = {
         user_id: req.params.id,
         class_id: req.params.class_id
     }
-
-    console.log(workout.id)
-    console.log(workout.class_id)
 
     Users.addClass(workout)
     .then(activity => {
@@ -19,7 +15,6 @@ router.post('/:id/workouts/:class_id', (req, res) => {
         console.log({name, message, stack, code})
         res.status(500).json({message: 'CANNOT ADD CLASS'})
     })
-
 })
 
 router.get('/:id/workouts', (req, res) => {
@@ -88,7 +83,7 @@ router.delete('/:id/workouts/:class_id', (req, res) => {
 
     Users.deleteClass(id)
     .then(deleted => {
-        res.status(200).json(deleted)
+        res.status(201).json(deleted)
     })
     .catch(({name, message, stack, code}) => {
         console.log({name, message, stack, code})
