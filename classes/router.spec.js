@@ -24,7 +24,7 @@ describe("classes router", () => {
             .then( res => {
                 expect(res.status).toBe(404)
             })
-        })
+        }) 
     })
 
     describe("POST /api/classes", () => {
