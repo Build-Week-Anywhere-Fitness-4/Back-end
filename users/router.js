@@ -1,10 +1,12 @@
 const router = require('express').Router()
 const Users = require("./model")
 
-router.post('/:id/workouts/:class_id', (req, res) => {
+const {noDuplicate} = require("../middleware/middleware")
+
+router.post('/:id/workouts/', (req, res) => {
     const workout = {
-        user_id: req.params.id,
-        class_id: req.params.class_id
+        user_id: Number(req.params.id),
+        class_id: req.body.class_id
     }
 
     Users.addClass(workout)
