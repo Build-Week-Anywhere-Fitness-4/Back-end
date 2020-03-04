@@ -50,7 +50,7 @@ function getClasses(id){
     .join("classes as c", "uc.class_id", "c.id")
     .join("users as u", "c.instructor_id", "u.id")
     .select(
-            'uc.class_id',
+            'uc.id',
             'c.name',
             'c.description',
             'c.type',
@@ -65,7 +65,8 @@ function getClasses(id){
 }
 
 function addClass(workout){
-    return db("users_classes").insert(workout)
+    return db("users_classes as uc")
+    .insert(workout)
 }
 
 function deleteClass(id){

@@ -83,8 +83,6 @@ router.delete('/:id', (req,res) => {
 router.delete('/:id/workouts/:class_id', (req, res) => {
     const id = Number(req.params.class_id)
 
-    console.log(Number(req.params.class_id))
-
     Users.deleteClass(id)
     .then(deleted => {
         res.status(200).json(deleted)
