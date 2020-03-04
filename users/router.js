@@ -1,10 +1,12 @@
 const router = require('express').Router()
 const Users = require("./model")
 
-router.post('/:id/workouts/:class_id', (req, res) => {
+const {noDuplicate} = require("../middleware/middleware")
+
+router.post('/:id/workouts/', (req, res) => {
     const workout = {
-        user_id: req.params.id,
-        class_id: req.params.class_id
+        user_id: Number(req.params.id),
+        class_id: req.body.class_id
     }
 
     Users.addClass(workout)
@@ -79,11 +81,13 @@ router.delete('/:id', (req,res) => {
 })
 
 router.delete('/:id/workouts/:class_id', (req, res) => {
-    const id = req.params.class_id
+    const id = Number(req.params.class_id)
+
+    console.log(Number(req.params.class_id))
 
     Users.deleteClass(id)
     .then(deleted => {
-        res.status(201).json(deleted)
+        res.status(200).json(deleted)
     })
     .catch(({name, message, stack, code}) => {
         console.log({name, message, stack, code})

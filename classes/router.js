@@ -7,6 +7,8 @@ const {isInstructor} = require("../middleware/middleware")
 router.post('/', isInstructor, (req, res) => {
     const newClass = req.body
 
+    
+
     Classes.add(newClass)
     .then( exercise => {
         if(exercise){
